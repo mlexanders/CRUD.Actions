@@ -1,5 +1,4 @@
-﻿using Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace CRUD.Actions.Implementation

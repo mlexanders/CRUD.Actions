@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace CRUD.Actions
 {
     public abstract class Entity<TKey>
     {
