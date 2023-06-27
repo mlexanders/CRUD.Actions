@@ -2,6 +2,6 @@
 {
     public abstract class Entity<TKey>
     {
-        public abstract TKey GetPrimaryKey();
+        public TKey Id { get; set; } = default!;
     }
 }

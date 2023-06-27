@@ -47,8 +47,10 @@ namespace CRUD.Actions.Implementation
 
         public async Task Update(TEntity entity)
         {
-            //var modifiedEntity = await dbSet.FirstOrDefaultAsync(e => e.GetPrimaryKey().Equals(entity.GetPrimaryKey()))
-            //    ?? throw new NotFoundEntity(entity);
+            var updatingEntity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(entity.Id));
+
+            if (updatingEntity == null)
+                throw new EntityNotFound(typeof(TEntity));
 
             dbSet.Update(entity);
             await dbContext.SaveChangesAsync();
