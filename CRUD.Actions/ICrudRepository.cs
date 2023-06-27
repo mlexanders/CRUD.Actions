@@ -9,6 +9,6 @@ namespace CRUD.Actions
         Task<TEntity[]> Read(Func<TEntity, bool> query = null!, Expression<Func<TEntity, object>> include = null!);
         Task<TEntity> ReadFirst(Expression<Func<TEntity, bool>> query = null!);
         Task Update(TEntity entity);
-        Task Delete(TEntity entity);
+        Task Delete(TKey key);
     }
 }

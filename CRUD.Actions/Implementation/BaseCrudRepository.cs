@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace CRUD.Actions.Implementation
 {
-    public class BaseCrudRepository<TEntity, Key> : ICrudRepository<TEntity, Key> where TEntity : Entity<Key>
+    public class BaseCrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
 
         protected readonly DbContext dbContext;
@@ -26,8 +26,13 @@ namespace CRUD.Actions.Implementation
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(TEntity entity)
+        public async Task Delete(TKey key)
         {
+            var entity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(key));
+
+            if (entity == null)
+                throw new EntityNotFound(typeof(TEntity));
+
             dbSet.Remove(entity);
             await dbContext.SaveChangesAsync();
         }

@@ -7,6 +7,6 @@
         Task<TEntity> ReadFirst(TKey key);
         Task<TEntity[]> Read();
         Task Update(TEntity entity);
-        Task Delete(TEntity entity);
+        Task Delete(TKey key);
     }
 }

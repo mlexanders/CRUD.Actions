@@ -1,6 +1,5 @@
 ﻿using CRUD.Actions.Implementation;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 
 namespace CRUD.Actions
 {
@@ -21,19 +20,19 @@ namespace CRUD.Actions
             await repository.Create(entity);
         }
 
-        [HttpPost("/many")]
+        [HttpPost("/api/[controller]/many")]
         public virtual async Task Create([FromBody] List<TEntity> entities)
         {
             await repository.Create(entities.ToArray());
         }
 
         [HttpDelete]
-        public virtual async Task Delete(TEntity entity)
+        public virtual async Task Delete(TKey key)
         {
-            await repository.Delete(entity);
+            await repository.Delete(key);
         }
 
-        [HttpGet("/all")]
+        [HttpGet("/api/[controller]/all")]
         public virtual Task<TEntity[]> Read()
         {
             return repository.Read();
