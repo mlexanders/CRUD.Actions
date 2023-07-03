@@ -1,7 +1,6 @@
-﻿using CRUD.Actions.Implementation;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CRUD.Actions
+namespace CRUD.Actions.Implementation
 {
     [Route("/api/[controller]")]
     [ApiController]
