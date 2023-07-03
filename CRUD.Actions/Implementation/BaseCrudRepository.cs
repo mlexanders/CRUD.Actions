@@ -1,5 +1,4 @@
-﻿using CRUD.Actions.Exceptions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace CRUD.Actions.Implementation
