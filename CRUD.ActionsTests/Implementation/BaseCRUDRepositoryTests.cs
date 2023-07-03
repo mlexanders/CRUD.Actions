@@ -55,15 +55,15 @@ namespace CRUD.ActionsTests.Implementation
             Assert.AreEqual(manufacturers.Count, Context.Manufacturers.ToArray().Count());
             Assert.AreEqual(manufacturers.Count, receivedManufacturers.Count());
 
-            var manufacturer = await Context.Manufacturers.FirstOrDefaultAsync(i => i.Guid == receivedManufacturers[1].Guid);
+            var manufacturer = await Context.Manufacturers.FirstOrDefaultAsync(i => i.Id == receivedManufacturers[1].Id);
             Assert.AreEqual(manufacturer.Name, receivedManufacturers[1].Name);
             Assert.AreEqual(manufacturer.Description, receivedManufacturers[1].Description);
 
-            var expectedFirstManufactured = manufacturers.Where(i => i.Guid == receivedManufacturers[1].Guid).First();
+            var expectedFirstManufactured = manufacturers.Where(i => i.Id == receivedManufacturers[1].Id).First();
             Assert.AreEqual(expectedFirstManufactured.Name, receivedManufacturers[1].Name);
             Assert.AreEqual(expectedFirstManufactured.Description, receivedManufacturers[1].Description);
 
-            var includedManufacturer = await ManufacturersRepository.ReadFirst(m => m.Guid == receivedManufacturers[1].Guid);
+            var includedManufacturer = await ManufacturersRepository.ReadFirst(m => m.Id == receivedManufacturers[1].Id);
             Assert.AreEqual(includedManufacturer.Name, receivedManufacturers[1].Name);
             Assert.AreEqual(includedManufacturer.Description, receivedManufacturers[1].Description);
 
@@ -87,7 +87,7 @@ namespace CRUD.ActionsTests.Implementation
 
             foreach (var car in carsWithManufacurer)
             {
-                if (car.Manufacturer is null && PresetTestData.GetCars().Find(c => c.VINCode == car.VINCode).Manufacturer is not null)
+                if (car.Manufacturer is null && PresetTestData.GetCars().Find(c => c.Name == car.Name).Manufacturer is not null)
                 {
                     Assert.Fail("included attributes not found");
                 }
@@ -111,14 +111,14 @@ namespace CRUD.ActionsTests.Implementation
                 Name = car.Name + "modified",
                 ManufacturerGuid = car.ManufacturerGuid,
                 PersonId = 3,
-                VINCode = car.VINCode
+                Id = car.Id
             };
 
             await CarsRepository.Update(modifiedCar);
 
-            car = await CarsRepository.ReadFirst(c => c.VINCode == car.VINCode);
+            car = await CarsRepository.ReadFirst(c => c.Id == car.Id);
 
-            Assert.AreEqual(car.VINCode, modifiedCar.VINCode);
+            Assert.AreEqual(car.Id, modifiedCar.Id);
             Assert.AreEqual(car.Name, modifiedCar.Name);
             Assert.AreEqual(car.PersonId, modifiedCar.PersonId);
         }
@@ -129,10 +129,13 @@ namespace CRUD.ActionsTests.Implementation
             Context.Database.EnsureDeleted();
             Context.Database.EnsureCreated();
 
-
             var cars = PresetTestData.GetCars();
-
-            await CarsRepository.Update(cars.FirstOrDefault());
+            try
+            {
+                await CarsRepository.Update(cars.FirstOrDefault());
+                Assert.Fail();
+            }
+            catch { }
 
             Assert.IsTrue((await CarsRepository.Read()).Length is 0);
         }

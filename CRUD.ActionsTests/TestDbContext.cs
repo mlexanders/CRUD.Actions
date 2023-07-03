@@ -10,6 +10,11 @@ namespace CRUD.ActionsTests
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Car>().Property(p => p.Id).gene
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseInMemoryDatabase(databaseName: "Test");
     }
