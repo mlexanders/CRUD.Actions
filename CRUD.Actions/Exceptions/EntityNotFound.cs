@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CRUD.Actions.Implementation
+namespace CRUD.Actions.Exceptions
 {
     [Serializable]
     internal class EntityNotFound : Exception
