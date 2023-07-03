@@ -28,24 +28,21 @@ namespace CRUD.ActionsTests
             };
         }
 
-        public static List<Car> GetCars()
-        {
-            return new()
+        public static List<Car> GetCars() => new()
             {
-                new Car { VINCode = VINCodes[0], Name = "Focus", ManufacturerGuid = guidsManufacturers[0], PersonId = 1},
-                new Car { VINCode = VINCodes[1], Name = "Mondeo", ManufacturerGuid = guidsManufacturers[1]},
-                new Car { VINCode = VINCodes[2], Name = "Avensis", ManufacturerGuid = guidsManufacturers[2], PersonId = 3}
+                new Car {Name = "Focus", ManufacturerGuid = guidsManufacturers[0], PersonId = 1},
+                new Car {Name = "Mondeo", ManufacturerGuid = guidsManufacturers[1]},
+                new Car {Name = "Avensis", ManufacturerGuid = guidsManufacturers[2], PersonId = 3}
             };
-        }
 
         public static List<Manufacturer> GetManufacturers()
         {
 
             return new()
             {
-                new Manufacturer { Guid = guidsManufacturers[0], Name = "Ford", Description = "Description0" },
-                new Manufacturer { Guid = guidsManufacturers[1], Name = "Ford", Description = "Description1" },
-                new Manufacturer { Guid = guidsManufacturers[2], Name = "Toyota", Description = "Description2" },
+                new Manufacturer {Name = "Ford", Description = "Description0" },
+                new Manufacturer {Name = "Ford", Description = "Description1" },
+                new Manufacturer {Name = "Toyota", Description = "Description2" },
             };
         }
     }

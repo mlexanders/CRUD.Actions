@@ -4,13 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRUD.Actions", "CRUD.Actions\CRUD.Actions.csproj", "{46036E68-BEF3-4713-9238-30E9BD951EA1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D628641D-491A-4E00-AAC7-845EBC15E7F8} = {D628641D-491A-4E00-AAC7-845EBC15E7F8}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRUD.ActionsTests", "CRUD.ActionsTests\CRUD.ActionsTests.csproj", "{F2D4FCBD-FF6C-43A2-AC86-326F007785C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{D628641D-491A-4E00-AAC7-845EBC15E7F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46036E68-BEF3-4713-9238-30E9BD951EA1} = {46036E68-BEF3-4713-9238-30E9BD951EA1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
