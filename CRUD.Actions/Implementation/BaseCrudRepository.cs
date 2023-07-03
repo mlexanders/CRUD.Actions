@@ -26,16 +26,6 @@ namespace CRUD.Actions.Implementation
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(TKey key)
-        {
-            var entity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(key));
-
-            if (entity == null)
-                throw new EntityNotFound(typeof(TEntity));
-
-            dbSet.Remove(entity);
-            await dbContext.SaveChangesAsync();
-        }
 
         public async Task<TEntity[]> Read(Func<TEntity, bool> query = null!, Expression<Func<TEntity, object>> include = null!)
         {
@@ -58,6 +48,17 @@ namespace CRUD.Actions.Implementation
                 throw new EntityNotFound(typeof(TEntity));
 
             dbSet.Update(entity);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(TKey key)
+        {
+            var entity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(key));
+
+            if (entity == null)
+                throw new EntityNotFound(typeof(TEntity));
+
+            dbSet.Remove(entity);
             await dbContext.SaveChangesAsync();
         }
     }
