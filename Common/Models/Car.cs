@@ -5,7 +5,6 @@ namespace Common.Models
 {
     public class Car : Entity<string>
     {
-        [Key]
         public string Name { get; set; }
         public Guid ManufacturerGuid { get; set; }
         public Manufacturer? Manufacturer { get; set; }
