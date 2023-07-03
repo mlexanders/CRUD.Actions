@@ -1,5 +1,4 @@
 ﻿using CRUD.Actions;
-using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
