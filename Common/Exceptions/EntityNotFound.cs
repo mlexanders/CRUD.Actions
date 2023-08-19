@@ -1,15 +1,11 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CRUD.Actions.Exceptions
+namespace Common.Exceptions
 {
     [Serializable]
-    internal class EntityNotFound : Exception
+    public class EntityNotFound : Exception
     {
         private Type type;
-
-        public EntityNotFound()
-        {
-        }
 
         public EntityNotFound(Type type)
         {

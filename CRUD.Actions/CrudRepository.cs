@@ -1,16 +1,17 @@
-﻿using CRUD.Actions.Exceptions;
+﻿using Common.Base;
+using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using System.Linq.Expressions;
 
-namespace CRUD.Actions.Implementation
+namespace Actions.Server
 {
-    public class BaseCrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
+    public class CrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
-
         protected readonly DbContext dbContext;
         protected readonly DbSet<TEntity> dbSet;
 
-        public BaseCrudRepository(DbContext dbContext)
+        public CrudRepository(DbContext dbContext)
         {
             this.dbContext = dbContext;
             dbSet = this.dbContext.Set<TEntity>();

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CRUD.Actions
+namespace Common.Base
 {
     public abstract class Entity<TKey>
     {
