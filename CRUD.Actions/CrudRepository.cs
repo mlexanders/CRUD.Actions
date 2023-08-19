@@ -8,7 +8,6 @@ namespace Actions.Server
 {
     public class CrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
-
         protected readonly DbContext dbContext;
         protected readonly DbSet<TEntity> dbSet;
 

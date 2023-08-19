@@ -6,7 +6,7 @@ namespace Actions.Server
 {
     public class MongoRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {
-        private readonly IMongoCollection<TEntity> collection;
+        protected readonly IMongoCollection<TEntity> collection;
 
         public MongoRepository(IMongoDatabase db)
         {
@@ -52,3 +52,4 @@ namespace Actions.Server
             await collection.ReplaceOneAsync(filter, entity);
         }
     }
+}
