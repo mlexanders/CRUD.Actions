@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CRUD.Actions.Implementation
+namespace Common.Exceptions
 {
     [Serializable]
-    internal class BadRequest : Exception
+    public class BadRequest : Exception
     {
         public BadRequest()
         {

@@ -1,6 +1,8 @@
-﻿using System.Net.Http.Json;
+﻿using Common.Base;
+using Common.Exceptions;
+using System.Net.Http.Json;
 
-namespace CRUD.Actions.Implementation
+namespace Actions.Client
 {
     public class BaseCrudRequests<TEntity, TKey> : ICrud<TEntity, TKey> where TEntity : Entity<TKey>
     {

@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Base;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CRUD.Actions.Implementation
+namespace Actions.Server
 {
     [Route("/api/[controller]")]
     [ApiController]
-    public abstract class BaseCrudController<TEntity, TKey> : Controller, ICrud<TEntity, TKey> where TEntity : Entity<TKey>
+    public abstract class CrudController<TEntity, TKey> : Controller, ICrud<TEntity, TKey> where TEntity : Entity<TKey>
     {
-        private readonly BaseCrudRepository<TEntity, TKey> repository;
+        private readonly ICrudRepository<TEntity, TKey> repository;
 
-        public BaseCrudController(BaseCrudRepository<TEntity, TKey> repository)
+        public CrudController(ICrudRepository<TEntity, TKey> repository)
         {
             this.repository = repository;
         }
