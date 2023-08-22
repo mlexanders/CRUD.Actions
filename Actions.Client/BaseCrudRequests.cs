@@ -22,7 +22,7 @@ namespace Actions.Client
 
         public async Task Create(List<TEntity> entities)
         {
-            var response = await client.PostAsJsonAsync(path, entities) ?? throw new NotImplementedException();
+            var response = await client.PostAsJsonAsync(path + $"{typeof(TEntity).Name}/many", entities) ?? throw new NotImplementedException();
             if (!response.IsSuccessStatusCode) throw new BadRequest(response.RequestMessage?.ToString());
         }
 
@@ -34,14 +34,14 @@ namespace Actions.Client
 
         public async Task<TEntity[]> Read()
         {
-            var response = await client.GetAsync(path) ?? throw new NotImplementedException();
+            var response = await client.GetAsync(path + $"{typeof(TEntity).Name}/all") ?? throw new NotImplementedException();
             if (!response.IsSuccessStatusCode) throw new BadRequest(response.RequestMessage?.ToString());
             return await response.Content.ReadFromJsonAsync<TEntity[]>();
         }
 
         public async Task<TEntity> ReadFirst(TKey key)
         {
-            var response = await client.GetAsync(path + $"/{key}") ?? throw new NotImplementedException();
+            var response = await client.GetAsync(path + $"{typeof(TEntity).Name}" + $"/{key}") ?? throw new NotImplementedException();
             if (!response.IsSuccessStatusCode) throw new BadRequest(response.RequestMessage?.ToString());
             return await response.Content.ReadFromJsonAsync<TEntity>();
         }
@@ -53,4 +53,3 @@ namespace Actions.Client
         }
     }
 }
-

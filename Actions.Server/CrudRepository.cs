@@ -1,7 +1,6 @@
 ﻿using Common.Base;
 using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 using System.Linq.Expressions;
 
 namespace Actions.Server

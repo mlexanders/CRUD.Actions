@@ -16,6 +16,7 @@ namespace Common.Exceptions
         public BadRequest(string? message, Exception? innerException) : base(message, innerException)
         {
         }
+
         protected BadRequest(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
