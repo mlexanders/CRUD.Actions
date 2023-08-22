@@ -9,4 +9,5 @@
         Task Update(TEntity entity);
         Task Delete(TKey key);
     }
+
 }

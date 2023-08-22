@@ -15,7 +15,6 @@ namespace Common.Exceptions
         public EntityNotFound(string? message) : base(message)
         {
         }
-
         public EntityNotFound(string? message, Exception? innerException) : base(message, innerException)
         {
         }

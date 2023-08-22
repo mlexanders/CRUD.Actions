@@ -11,4 +11,5 @@ namespace Common.Base
         Task Update(TEntity entity);
         Task Delete(TKey key);
     }
+
 }

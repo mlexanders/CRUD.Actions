@@ -6,5 +6,6 @@ namespace Common.Base
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public TKey Id { get; set; } = default!;
+
     }
 }
