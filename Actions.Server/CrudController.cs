@@ -38,7 +38,7 @@ namespace Actions.Server
             return repository.Read();
         }
 
-        [HttpGet]
+        [HttpGet("{key}")]
         public virtual async Task<TEntity> ReadFirst(TKey key)
         {
             return await repository.ReadFirst(e => e.Id!.Equals(key));
