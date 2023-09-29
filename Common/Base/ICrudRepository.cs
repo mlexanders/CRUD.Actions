@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Common.Base
+namespace Actions.Common.Base
 {
     public interface ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
     {

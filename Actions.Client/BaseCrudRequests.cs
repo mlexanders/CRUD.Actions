@@ -1,5 +1,5 @@
-﻿using Common.Base;
-using Common.Exceptions;
+﻿using Actions.Common.Base;
+using Actions.Common.Exceptions;
 using System.Net.Http.Json;
 
 namespace Actions.Client

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Common.Exceptions
+namespace Actions.Common.Exceptions
 {
     [Serializable]
     public class EntityNotFound : Exception

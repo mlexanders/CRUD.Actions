@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Common.Base
+namespace Actions.Common.Base
 {
     public abstract class Entity<TKey>
     {

@@ -1,4 +1,4 @@
-﻿namespace Common.Base
+﻿namespace Actions.Common.Base
 {
     public interface ICrud<TEntity, TKey> where TEntity : Entity<TKey>
     {
