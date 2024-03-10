@@ -1,66 +1,68 @@
-﻿using Actions.Common.Base;
+﻿using System.Linq.Expressions;
+using Actions.Common.Base;
 using Actions.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
-namespace Actions.Server
+namespace Actions.Server;
+
+public class CrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
 {
-    public class CrudRepository<TEntity, TKey> : ICrudRepository<TEntity, TKey> where TEntity : Entity<TKey>
+    protected readonly DbContext dbContext;
+    protected readonly DbSet<TEntity> dbSet;
+
+    public CrudRepository(DbContext dbContext)
     {
-        protected readonly DbContext dbContext;
-        protected readonly DbSet<TEntity> dbSet;
+        this.dbContext = dbContext;
+        dbSet = this.dbContext.Set<TEntity>();
+    }
 
-        public CrudRepository(DbContext dbContext)
-        {
-            this.dbContext = dbContext;
-            dbSet = this.dbContext.Set<TEntity>();
-        }
+    public async Task Create(TEntity entity)
+    {
+        await Create(new[] { entity });
+    }
 
-        public async Task Create(TEntity entity)
-        {
-            await Create(new[] { entity });
-        }
+    public async Task Create(TEntity[] entity)
+    {
+        await dbSet.AddRangeAsync(entity);
+        await dbContext.SaveChangesAsync();
+    }
 
-        public async Task Create(TEntity[] entity)
-        {
-            await dbSet.AddRangeAsync(entity);
-            await dbContext.SaveChangesAsync();
-        }
+    public async Task<TEntity[]> Read(Func<TEntity, bool> query = null!,
+        Expression<Func<TEntity, object>> include = null!)
+    {
+        if (query == null)
+            return include is null
+                ? await dbSet.AsNoTracking().ToArrayAsync()
+                : dbSet.AsNoTracking().Include(include).ToArray();
+        return include is null
+            ? dbSet.AsNoTracking().Where(query).ToArray()
+            : dbSet.AsNoTracking().Include(include).Where(query).ToArray();
+    }
 
+    public async Task<TEntity> ReadFirst(Expression<Func<TEntity, bool>> query)
+    {
+        return await dbSet.FirstOrDefaultAsync(query);
+    }
 
-        public async Task<TEntity[]> Read(Func<TEntity, bool> query = null!, Expression<Func<TEntity, object>> include = null!)
-        {
-            if (query == null)
-                return include is null ? await dbSet.AsNoTracking().ToArrayAsync() : dbSet.AsNoTracking().Include(include).ToArray();
-            else
-                return include is null ? dbSet.AsNoTracking().Where(query).ToArray() : dbSet.AsNoTracking().Include(include).Where(query).ToArray();
-        }
+    public async Task Update(TEntity entity)
+    {
+        var updatingEntity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(entity.Id));
 
-        public async Task<TEntity> ReadFirst(Expression<Func<TEntity, bool>> query)
-        {
-            return await dbSet.FirstOrDefaultAsync(query);
-        }
+        if (updatingEntity == null)
+            throw new EntityNotFound(typeof(TEntity));
 
-        public async Task Update(TEntity entity)
-        {
-            var updatingEntity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(entity.Id));
+        dbSet.Update(entity);
+        await dbContext.SaveChangesAsync();
+    }
 
-            if (updatingEntity == null)
-                throw new EntityNotFound(typeof(TEntity));
+    public async Task Delete(TKey key)
+    {
+        var entity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(key));
 
-            dbSet.Update(entity);
-            await dbContext.SaveChangesAsync();
-        }
+        if (entity == null)
+            throw new EntityNotFound(typeof(TEntity));
 
-        public async Task Delete(TKey key)
-        {
-            var entity = await dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id!.Equals(key));
-
-            if (entity == null)
-                throw new EntityNotFound(typeof(TEntity));
-
-            dbSet.Remove(entity);
-            await dbContext.SaveChangesAsync();
-        }
+        dbSet.Remove(entity);
+        await dbContext.SaveChangesAsync();
     }
 }

@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CrudController.cs" />
-    <Compile Remove="MongoRepository.cs" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="CrudController.cs"/>
+        <Compile Remove="MongoRepository.cs"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Actions.Common.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Common\Actions.Common.csproj"/>
+    </ItemGroup>
 
 </Project>
